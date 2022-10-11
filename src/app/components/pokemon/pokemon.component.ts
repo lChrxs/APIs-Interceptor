@@ -13,18 +13,17 @@ export class PokemonComponent implements OnInit {
   pokemon: string = ''
 
   constructor(private apiS: ApiService) { 
-    this.pokemon$ = this.apiS.searchPokemon('gyarados').pipe(
-      tap(console.log)
-    )
+    this.pokemon$ = this.apiS.searchPokemon('gyarados')
   }
 
   ngOnInit(): void {
   }
 
   searchPokemon(){
-    this.pokemon$ = this.apiS.searchPokemon(this.pokemon).pipe(
-      tap(console.log)
-    )
+    if(this.pokemon.length > 2){
+
+      this.pokemon$ = this.apiS.searchPokemon(this.pokemon.toLocaleLowerCase())
+    }
   }
 
 }

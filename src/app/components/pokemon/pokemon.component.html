@@ -2,27 +2,36 @@
   <div class="row d-flex justify-content-center">
     <div class="col-lg-10 my-5">
       
-      <div class="col-lg-5">
+      <div class="col-lg-5 mx-auto">
         <input type="text" class="form-control fs-4" name="pokemon" placeholder="Busca tu pokemon favorito" [(ngModel)]="pokemon" (input)="searchPokemon()">
       </div>
 
       <div class="row g-4 my-5 d-flex justify-content-center" *ngIf="pokemon$ | async as pokemon">
-        <div class="col-lg-5">
-          <mat-card>
-            <mat-card-header>
-              <mat-card-title>{{pokemon.name}}</mat-card-title>
-              <mat-card-subtitle *ngFor="let type of pokemon.types">{{type.type.name}}</mat-card-subtitle>
-            </mat-card-header>
-            <img mat-card-image [src]="pokemon.sprites.back_shiny" alt="Imagen de {{pokemon.name}}">
-            <mat-card-content>
-              <p>Abilities: <span *ngFor="let ability of pokemon.abilities; let isLast=last">{{ability.ability.name}} {{isLast ? '' : ', '}}</span></p>
-              <p>Moves: <span *ngFor="let move of pokemon.moves; let isLast=last">{{move.move.name}} {{isLast ? '' : ', '}}</span></p>
-            </mat-card-content>
-            <mat-card-actions>
-              <button mat-button>LIKE</button>
-              <button mat-button>SHARE</button>
-            </mat-card-actions>
-          </mat-card>
+        <div class="col-lg-10">
+
+          <div class="card mb-3">
+            <div class="row g-0">
+
+              <div class="col-md-2">
+                <img *ngIf="pokemon.sprites.front_shiny" [src]="pokemon.sprites.front_shiny" class="img-fluid rounded-start" alt="Imagen de {{pokemon.name}}">
+                <img *ngIf="pokemon.sprites.back_shiny" [src]="pokemon.sprites.back_shiny" class="img-fluid rounded-start" alt="Imagen de {{pokemon.name}}">
+                <img *ngIf="pokemon.sprites.front_default" [src]="pokemon.sprites.front_default" class="img-fluid rounded-start" alt="Imagen de {{pokemon.name}}">
+                <img *ngIf="pokemon.sprites.back_default" [src]="pokemon.sprites.back_default" class="img-fluid rounded-start" alt="Imagen de {{pokemon.name}}">
+                <img *ngIf="pokemon.sprites.front_female" [src]="pokemon.sprites.front_female" class="img-fluid rounded-start" alt="Imagen de {{pokemon.name}}">
+                <img *ngIf="pokemon.sprites.back_female" [src]="pokemon.sprites.back_female" class="img-fluid rounded-start" alt="Imagen de {{pokemon.name}}">
+              </div>
+
+              <div class="col-md-10">
+                <div class="card-body">
+                  <h1 class="card-title fw-bold">{{pokemon.name | titlecase}}</h1>
+                  <h2 class="card-subtitle">Type: <span  *ngFor="let type of pokemon.types let isLast=last">{{type}}{{isLast ? '' : ', '}}</span></h2>
+                  <p class="card-text fs-5">Abilities: <span *ngFor="let ability of pokemon.abilities; let isLast=last">{{ability}}{{isLast ? '' : ', '}}</span></p>
+                  <p class="card-text fs-5">Moves: <span *ngFor="let move of pokemon.moves; let isLast=last">{{move}}{{isLast ? '' : ', '}}</span></p>
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
       </div>
 
