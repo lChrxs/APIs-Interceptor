@@ -1,0 +1,31 @@
+<div class="container-fluid">
+  <div class="row d-flex justify-content-center">
+    <div class="col-lg-10 my-5">
+      
+      <div class="col-lg-5">
+        <input type="text" class="form-control fs-4" name="pokemon" placeholder="Busca tu pokemon favorito" [(ngModel)]="pokemon" (input)="searchPokemon()">
+      </div>
+
+      <div class="row g-4 my-5 d-flex justify-content-center" *ngIf="pokemon$ | async as pokemon">
+        <div class="col-lg-5">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>{{pokemon.name}}</mat-card-title>
+              <mat-card-subtitle *ngFor="let type of pokemon.types">{{type.type.name}}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image [src]="pokemon.sprites.back_shiny" alt="Imagen de {{pokemon.name}}">
+            <mat-card-content>
+              <p>Abilities: <span *ngFor="let ability of pokemon.abilities; let isLast=last">{{ability.ability.name}} {{isLast ? '' : ', '}}</span></p>
+              <p>Moves: <span *ngFor="let move of pokemon.moves; let isLast=last">{{move.move.name}} {{isLast ? '' : ', '}}</span></p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button>LIKE</button>
+              <button mat-button>SHARE</button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

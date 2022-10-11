@@ -1,0 +1,33 @@
+<div class="container-fluid">
+  <div class="row d-flex justify-content-center">
+    <div class="col-lg-10 my-5">
+      
+      <div class="col-lg-5">
+        <input type="text" class="form-control fs-4" name="character" placeholder="Busca tu personaje favorito de Rick y Morty" [(ngModel)]="character" (input)="searchCharacter()">
+      </div>
+
+      <div class="row g-4 my-5" *ngIf="character$ | async as characters">
+        <div class="col-lg-2" *ngFor="let character of characters.results">
+          <mat-card class="h-100">
+            <mat-card-header>
+              <mat-card-title>{{character.name}}</mat-card-title>
+              <mat-card-subtitle>{{character.species}}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image [src]="character.image" alt="Imagen de {{character.name}}">
+            <mat-card-content>
+              <p>Status: {{character.status}}</p>
+              <p *ngIf="character.type">Type: {{character.type}}</p>
+              <p>Gender: {{character.gender}}</p>
+              <p *ngIf="character.origin.name">Origin: {{character.origin.name}}</p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button>LIKE</button>
+              <button mat-button>SHARE</button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
